@@ -57,6 +57,29 @@ interfaces:
     retry_codes_name: idempotent
     retry_params_name: default
     timeout_millis: 30000
+    sample_code_init_fields:
+    - document.type=PLAIN_TEXT
+    sample_value_sets:
+    - id: sentiment_text
+      title: "sentiment_text"
+      description: ""
+      parameters:
+      - document.type=PLAIN_TEXT
+      - document.content="Hello Hello Hello!"
+    - id: sentiment_file
+      title: "sentiment_file"
+      description: ""
+      parameters:
+      - document.type=PLAIN_TEXT
+      - document.gcs_content_uri=gcs_uri
+      callable_parameters:
+      - whoa
+    samples:
+      standalone:
+      - calling_forms: callable
+        value_sets: [sentiment_text]
+      - calling_forms: ".*"
+        value_sets: [sentiment_file]
   - name: AnalyzeEntities
     flattening:
       groups:
